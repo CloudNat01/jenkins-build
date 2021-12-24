@@ -7,6 +7,6 @@ node {
                   def customImage = docker.build("lovetha/test-image")
              
               /*  */
-                 customImage.push()
+                  customImage.push()
            }
         }
