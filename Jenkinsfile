@@ -1,11 +1,46 @@
-node {
-    checkout scm
+pipeline{
 
-    docker.withRegistry('https://registry.hub.docker.com', 'cloudnat-dockerhub' , '--password-stdin.') {
+	agent any
 
-        def customImage = docker.build("sample:${env.BUILD_ID}")
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('cloudnat-dockerhub')
+	}
 
-        /* Push the container to the custom Registry */
-        customImage.push()
-    }
+	stages {
+	    
+	    stage('gitclone') {
+
+			steps {
+				git 'https://github.com/CloudNat01/jenkins-build.git'
+			}
+		}
+
+		stage('Build') {
+
+			steps {
+				sh 'docker build -t cloudnat/sample:latest .'
+			}
+		}
+
+		stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+
+		stage('Push') {
+
+			steps {
+				sh 'docker push cloudnat/sample:latest'
+			}
+		}
+	}
+
+	post {
+		always {
+			sh 'docker logout'
+		}
+	}
+
 }
