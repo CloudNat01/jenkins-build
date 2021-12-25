@@ -1,6 +1,6 @@
-pipeline{
+node{
 
-	agent { label 'docker' }
+	agent any
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('cloudnat-dockerhub')
