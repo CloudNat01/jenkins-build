@@ -1,6 +1,6 @@
 pipeline{
 
-	agent any
+	agent { label 'linux' }
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('cloudnat-dockerhub')
@@ -10,7 +10,7 @@ pipeline{
 	    
 	   stage('Build') {
                steps {
-			sh 'docker build -t cloudnat/sample-web:latest .'
+			sh 'sudo docker build -t cloudnat/sample-web:latest .'
 			}
 		}
 
@@ -22,7 +22,7 @@ pipeline{
 
 	   stage('Push') {
              steps {
-			sh 'docker push cloudnat/sample-web:latest'
+			sh 'sudo docker push cloudnat/sample-web:latest'
 			}
 		}
 	}
