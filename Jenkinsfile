@@ -1,7 +1,7 @@
 node {
     checkout scm
 
-    docker.withRegistry('https://registry.hub.docker.com', 'cloudnat-dockerhub') {
+    docker.withRegistry('https://registry.hub.docker.com', 'cloudnat-dockerhub' , '--password-stdin.') {
 
         def customImage = docker.build("sample:${env.BUILD_ID}")
 
