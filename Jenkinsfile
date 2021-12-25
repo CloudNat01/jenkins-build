@@ -1,6 +1,6 @@
 pipeline{
 
-	agent docker
+	agent { label 'docker' }
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('cloudnat-dockerhub')
