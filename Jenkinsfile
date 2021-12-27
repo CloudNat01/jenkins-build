@@ -49,7 +49,7 @@ node {
 
     stage("Git Clone"){
 
-        git credentialsId: 'GIT_CREDENTIALS', url: 'https://github.com/CloudNat01/jenkins-build.git'
+        git credentialsId: 'GIT', url: 'https://github.com/CloudNat01/jenkins-build.git'
     }
 
 
