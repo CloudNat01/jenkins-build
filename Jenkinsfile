@@ -11,7 +11,7 @@ pipeline{
 
 	    stage('Build') {
 			steps {
-				sh 'docker build -t $DOCKERHUB_USERNAME/jk-img:latest .'
+				sh 'docker build -t cloudnat/jk-img:latest .'
 			}
 		}
 
@@ -22,7 +22,7 @@ pipeline{
 		}
 	     stage('Push') {
 			steps {
-				sh 'docker push $DOCKERHUB_USERNAME/jk-img:latest'
+				sh 'docker push cloudnat/jk-img:latest'
 			}
 		}
 	}
