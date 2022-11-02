@@ -45,27 +45,27 @@
 
 // }
 
-// node {
+node {
 
-//     stage("Git Clone"){
+    stage("Git Clone"){
 
-//         git credentialsId: 'GIT', url: 'https://github.com/CloudNat01/jenkins-build.git'
-//     }
+        git credentialsId: 'GIT', url: 'https://github.com/CloudNat01/jenkins-build.git'
+    }
 
 
-//     stage("Docker build"){
-//         sh 'docker version'
-//         sh 'docker build -t cloudnat/sample-image:demo-build .'
-//         sh 'docker image list'
-//     }
+    stage("Docker build"){
+        sh 'docker version'
+        sh 'docker build -t cloudnat/sample-image:demo-build .'
+        sh 'docker image list'
+    }
 
-//     withCredentials([string(credentialsId: 'cloudnat-dockerhub', variable: 'PASSWORD')]) {
-//         sh 'docker login -u cloudnat -p $PASSWORD'
-//     }
+    withCredentials([string(credentialsId: 'cloudnat-dockerhub', variable: 'PASSWORD')]) {
+        sh 'docker login -u cloudnat -p $PASSWORD'
+    }
 
-//     stage("Push Image to Docker Hub"){
-//         sh 'docker push  cloudnat/sample-image:demo-build'
-//     }
-// }
+    stage("Push Image to Docker Hub"){
+        sh 'docker push  cloudnat/sample-image:demo-build'
+    }
+}
  
 
